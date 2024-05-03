@@ -5,7 +5,7 @@ return {
 		vim.g.UltiSnipsExpandTrigger = "<tab>"
 		vim.g.UltiSnipsJumpForwardTrigger = "<tab>"
 		vim.g.UltiSnipsJumpBackwardTrigger = "<s-tab>"
-		vim.g.UltiSnipsSnippetDirectories = { "~/.vim/UltiSnips" }
+		vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/UltiSnips/" }
 	end,
 	config = function()
 		-- key mappings

@@ -1,0 +1,743 @@
+# ------------------------------------------------------------- #
+
+global !p
+def math():
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return x != '0' and x != '0'
+
+endglobal
+
+# ------------------------------------------------------------- #
+
+snippet im "inline math mode" i
+$ ${1:${VISUAL}} $$0
+endsnippet
+
+snippet dm "display math mode" bA
+$$ ${0:${VISUAL}} $$
+endsnippet
+
+snippet Dm "displaystyle inline math mode" i
+$\displaystyle ${0:${VISUAL}} $
+endsnippet
+
+snippet env "create an environment" bA
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+context "math()"
+snippet env "create an env inside math mode" iA
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+snippet cmd "create a commande" i
+\\$1{${2:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])(\d)' "auto subscript" irA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])_(\d{2})' "auto subscript2" irA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\)([a-zA-Z])([a-zA-Z])\2' "auto subscript3" iAr
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '([a-zA-Z])_([a-zA-Z]{2})' "auto subscript4" iAr
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+context "math()"
+snippet sq "^2" iA
+^2
+endsnippet
+
+context "math()"
+snippet cb "^3" iA
+^3
+endsnippet
+
+context "math()"
+snippet sr "\sqrt{}" iA
+\sqrt{$1}
+endsnippet
+
+context "math()"
+snippet Sr "\sqrt[]{}" iA
+\sqrt[$1]{$2}
+endsnippet
+
+context "math()"
+snippet '([A-Za-z]|[\|\}\)\]]|\d)--' "superscript" irA
+`!p snip.rv = match.group(1)`^{$1}$0
+endsnippet
+
+context "math()"
+snippet '([A-Za-z]|[\|\}\)\]]|\d)\_\_' "subscript" irA
+`!p snip.rv = match.group(1)`_{$1}$0
+endsnippet
+
+context "math()"
+snippet '([A-Za-z]|[\|\}\)\]]|\d)\_-' "sub-&super-script" irA
+`!p snip.rv = match.group(1)`_{$1}^{$2}$0
+endsnippet
+
+context "math()"
+snippet // "Fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+context "math()"
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1}$0
+endsnippet
+
+context "math()"
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)(((\^|_)(\{\w+\}|\w))|\')*)/' "Fraction" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+priority 1000
+context "math()"
+snippet '^.*\)/' "() Fraction" wrA
+`!p
+stripped = match.string[:-1]
+depth = 0
+i = len(stripped) - 1
+while True:
+	if stripped[i] == ')': depth += 1
+	if stripped[i] == '(': depth -= 1
+	if depth == 0: break;
+	i -= 1
+snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+`{$1}$0
+endsnippet
+
+priority 10
+context "math()"
+snippet "bar" "bar" riA
+\overline{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])bar" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+context "math()"
+snippet "hat" "hat" riA
+\hat{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])hat" "hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+context "math()"
+snippet Vec "vector" iA
+\overrightarrow{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet vec "vector" iA
+\vec{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet "(\\?\w+)(';|;')" "vector postfix" riA
+\overrightarrow{`!p snip.rv=match.group(1)`$1}
+endsnippet 
+
+context "math()"
+snippet "(\\?\w+)(,\.|\.,)" "vector postfix" riA
+\vec{`!p snip.rv=match.group(1)`$1}
+endsnippet 
+
+context "math()"
+snippet ali "aligned environment" iA
+\begin{aligned}[t]
+	${0:${VISUAL}}
+\end{aligned}
+endsnippet
+
+snippet ali "align* environment" biA
+{
+	\allowdisplaybreaks
+	\begin{align*}
+		${0:${VISUAL}}
+	\end{align*}
+}
+endsnippet
+
+context "env('aligned') or env('align*') or env('split')"
+snippet == "align equal sign" iA
+&= $1 \\\\$0
+endsnippet
+
+priority 100
+context "math()"
+snippet lim "\lim" i
+\lim_{${1:x} \to ${2:0}} $0
+endsnippet
+
+priority 200
+context "math()"
+snippet 2lim "bivariable limit" i
+\lim_{\substack{${1:x} \to ${2:0} \\ ${3:y} \to ${4:0}}} $0
+endsnippet
+
+context "math()"
+snippet text "\text{}" iA
+\text{${1:${VISUAL}}}$0
+endsnippet
+
+snippet bf "\textbf" i
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet it "\textit" i
+\textit{${1:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet mf "\mathbf" i
+\mathbf{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet mb "\mathbb" i
+\mathbb{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet mcal "\mathcal" i
+\mathcal{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet mfrak "\mathfrak" i
+\mathfrak{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet AA "for all" iA
+\forall
+endsnippet
+
+context "math()"
+snippet EE "exists" iA
+\exists
+endsnippet
+
+context "math()"
+snippet norm "norm" iA
+\|${1:${VISUAL}}\|$0
+endsnippet
+
+priority 200
+context "math()"
+snippet imp "implies" iA
+\implies
+endsnippet
+
+priority 300
+context "math()"
+snippet byimp "implied by" iA
+\impliedby
+endsnippet
+
+priority 100
+context "math()"
+snippet dif "literal d" iA
+\dif
+endsnippet
+
+priority 200
+context "math()"
+snippet newdif "newcommand dif" iA
+\newcommand{\dif}{\operatorname{d}\!}
+endsnippet
+
+priority 100
+context "math()"
+snippet df "1st order differentiation" iA
+\frac{\dif ${1:${VISUAL:y}}}{\dif ${2:x}}\,
+endsnippet
+
+priority 200
+context "math()"
+snippet ddf "2st order differentiation" iA
+\frac{\dif^2 ${1:${VISUAL:y}}}{\dif ${2:x}^2}\,
+endsnippet
+
+priority 150
+context "math()"
+snippet 'dd([a-zA-Z])' "differentiation" iAr
+\frac{\dif ${VISUAL}}{\dif `!p snip.rv = match.group(1)`}\,
+endsnippet
+
+context "math()"
+snippet par "\partial" iA
+\partial
+endsnippet
+
+priority 100
+context "math()"
+snippet pt "partial differentiation" iA
+\frac{\partial ${1:${VISUAL:f}}}{\partial ${2:x}}\,
+endsnippet
+
+priority 200
+context "math()"
+snippet ppt "2nd order partial differentiation" iA
+\frac{\partial^2 ${1:${VISUAL:f}}}{\partial ${2:x}^2}\,
+endsnippet
+
+priority 200
+context "math()"
+snippet ppT "2nd order partial differentiation" iA
+\frac{\partial^2 ${1:${VISUAL:f}}}{\partial ${2:x}\partial ${3:y}}\,
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|i)int' "\int \dif" iAr
+\int ${1:${VISUAL}} \dif ${2:x}
+endsnippet
+
+priority 200
+context "math()"
+snippet dint "\int_{}^{} \dif" iA
+\int_{${1:-\infty}}^{${2:+\infty}} ${3:${VISUAL}} \dif ${4:x}
+endsnippet
+
+priority 200
+context "math()"
+snippet "(?<!\\)iint" "\int\int \dif \dif" iAr
+\iint ${1:${VISUAL}} \dif ${2:x}\dif ${3:y}
+endsnippet
+
+priority 300
+context "math()"
+snippet d_{in}t "diint->d_{in}t \int_{}^{}*2" iA
+\int_{${1:-\infty}}^{${2:+\infty}} \int_{${3:-\infty}}^{${4:+\infty}} ${5:${VISUAL}} \dif ${6:x}\dif ${7:y}
+endsnippet
+
+priority 300
+context "math()"
+snippet d_{in}T "diinT->d_{in}T \iint with substack" iA
+\underset{${1:\substack{$2}}}{\iint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}}
+endsnippet
+
+priority 300
+context "math()"
+snippet d_{ii}nt "diiint->d_{in}it \int_{}^{}*3" iA
+\int_{${1:-\infty}}^{${2:+\infty}} \int_{${3:-\infty}}^{${4:+\infty}} \int_{${5:-\infty}}^{${6:+\infty}} ${7:${VISUAL}} \dif ${8:x}\dif ${9:y}\dif ${10:z}
+endsnippet
+
+priority 300
+context "math()"
+snippet d_{ii}nT "diiinT->d_{in}iT \iint with substack" iA
+\underset{${1:\substack{$2}}}{\iiint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}\dif ${7:z}}
+endsnippet
+
+context "math()"
+snippet inf "\infty" iA
+\infty
+endsnippet
+
+snippet enum "enumerate env" bA
+\begin{enumerate}
+	\item ${0:${VISUAL}}
+\end{enumerate}
+endsnippet
+
+snippet item "itemize env" bA
+\begin{itemize}
+	\item ${0:${VISUAL}}
+\end{itemize}
+endsnippet
+
+snippet equ "equation env" bA
+\begin{equation} \label{equ:`!p snip.rv = snip.basename`-$1} ${2:\tag*{$3}}
+	${0:${VISUAL}}
+\end{equation}
+endsnippet
+
+snippet lab "\label" i
+\label{${2:e}${2/(e)$|(f)$|(t)$|(.*)/(?1:qu)(?2:ig)(?3:ab)/}:`!p snip.rv = snip.basename`-$1}
+endsnippet
+
+snippet ref "\ref" i
+\\${2/(e)$|(f)$|(t)$|(.*)/(?1:eq)(?2:fig)(?3:tab)/}ref{${2:e}${2/(e)$|(f)$|(t)$|(.*)/(?1:qu)(?2:ig)(?3:ab)/}:`!p snip.rv = snip.basename`-$1}
+endsnippet
+
+priority 100
+context "math()"
+snippet lrp "left right parentheses" iA
+\left( ${1:${VISUAL}} \right)$0
+endsnippet
+
+priority 200
+context "math()"
+snippet blrp "bigger left right parentheses" iA
+\Bigl( ${1:${VISUAL}} \Bigr)$0
+endsnippet
+
+priority 100
+context "math()"
+snippet lrb "left right brackets" iA
+\left[ ${1:${VISUAL}} \right]$0
+endsnippet
+
+priority 200
+context "math()"
+snippet blrb "bigger left right brackets" iA
+\Bigl[ ${1:${VISUAL}} \Bigr]$0
+endsnippet
+
+priority 100
+context "math()"
+snippet lrc "left right curly brackets" iA
+\left\\{ ${1:${VISUAL}} \right\\}$0
+endsnippet
+
+priority 200
+context "math()"
+snippet blrc "bigger left right curly brackets" iA
+\Bigl\\{ ${1:${VISUAL}} \Bigr\\}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet lra "left right angles" iA
+\left< ${1:${VISUAL}} \right>$0
+endsnippet
+
+priority 200
+context "math()"
+snippet blra "bigger left right angles" iA
+\Bigl< ${1:${VISUAL}} \Bigr>$0
+endsnippet
+
+priority 100
+context "math()"
+snippet lr| "left right bars" iA
+\left| ${1:${VISUAL}} \right|$0
+endsnippet
+
+priority 200
+context "math()"
+snippet blr| "bigger left right bars" iA
+\Bigl| ${1:${VISUAL}} \Bigr|$0
+endsnippet
+
+context "math()"
+snippet B| "\Big|_{}^{}" iA
+${1:\Big|}_{$2}^{$3}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|r|c)(sin|cos|tan|cot|sec|csc|ln|log|exp|grad)' "auto backslash" iAr
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+priority 200
+context "math()"
+snippet '(?<!\\)(arcsin|arctan|arcsec)' "auto backslash" iAr
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+context "math()"
+snippet ar_{co}s "\arccos" iA
+\arccos
+endsnippet
+
+context "math()"
+snippet ar_{co}t "\arccot" iA
+\arccot
+endsnippet
+
+context "math()"
+snippet ar_{cs}c "\arccos" iA
+\arccsc
+endsnippet
+
+snippet cd "center dot" iA
+\cdot 
+endsnippet
+
+snippet ... "lower dots" iA
+\dots
+endsnippet
+
+snippet *** "center dots" iA
+\cdots
+endsnippet
+
+context "math()"
+snippet ee "exp" iA
+\operatorname{e}^{${1:x}}$0
+endsnippet
+
+context "math()"
+snippet bmat "bracket matrix" iA
+\begin{bmatrix}
+	${0:${VISUAL}}
+\end{bmatrix}
+endsnippet
+
+context "math()"
+snippet pmat "parentheses matrix" iA
+\begin{pmatrix}
+	${0:${VISUAL}}
+\end{pmatrix}
+endsnippet
+
+context "math()"
+snippet vmat "vertical matrix" iA
+\begin{vmatrix}
+	${0:${VISUAL}}
+\end{vmatrix}
+endsnippet
+
+context "math()"
+snippet Bmat "curly bracket matrix" iA
+\begin{Bmatrix}
+	${0:${VISUAL}}
+\end{Bmatrix}
+endsnippet
+
+context "env('bmatrix')"
+snippet '   ' " & " iAr
+ & 
+endsnippet
+
+context "env('pmatrix')"
+snippet '   ' " & " iAr
+ & 
+endsnippet
+
+context "env('vmatrix')"
+snippet '   ' " & " iAr
+ & 
+endsnippet
+
+context "env('Bmatrix')"
+snippet '   ' " & " iAr
+ & 
+endsnippet
+
+context "env('dcases')"
+snippet \\\ "cases" iA
+ ,\quad& $1 \\\\
+endsnippet
+
+context "env('aligned') or env('align*') or env('split')"
+snippet \\\ "aligned" iA
+& ${0:${VISUAL}} \\\\
+endsnippet
+
+context "math()"
+snippet case "cases env" iA
+\begin{dcases}
+	${0:${VISUAL}}
+\end{dcases}
+endsnippet
+
+snippet spl "split env" bA
+\begin{equation} \label{equ:`!p snip.rv = snip.basename`-$1} ${2:\tag*{$3}}
+	\begin{split}
+		${0:${VISUAL}}
+	\end{split}
+\end{equation}
+endsnippet
+
+priority 50
+context "math()"
+snippet xx "\times" iA
+\times
+endsnippet
+
+snippet tab "Table environment" b
+\begin{table}[${1:htpb}]
+	\centering
+${2:	\caption{$3}}
+	\label{tab:`!p snip.rv = snip.basename`-$4}
+	\begin{${5:t}${5/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${6:c}}
+		$0`!p snip.rv = (t[6].count('c') + t[6].count('l') + t[6].count('r') - 1) * ' & '` \\\\
+	\end{$5${5/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+\end{table}
+endsnippet
+
+context "env('tabular')"
+snippet '   ' " & " iAr
+ & 
+endsnippet
+
+context "env('tabular')"
+snippet line "create a line in tabular" bA
+$1 & $2 & $3 & $4 \\\\
+\hline
+endsnippet
+
+context "math()"
+snippet op "\operatorname" iA
+\operatorname{$1}
+endsnippet
+
+context "math()"
+snippet OP "probability of an event" iA
+\operatorname{P}\left( ${1:${VISUAL}} \right)
+endsnippet
+
+context "math()"
+snippet Rn "Rn" iA
+\mathbb{R}^{${1:n}}
+endsnippet
+
+context "math()"
+snippet geq "greater than or equal to" iA
+\geq
+endsnippet
+
+context "math()"
+snippet leq "less than or equal to" iA
+\leq
+endsnippet
+
+context "math()"
+snippet neq "not equal to" iA
+\neq
+endsnippet
+
+context "math()"
+snippet cir "^\circle" iA
+^\circ
+endsnippet
+
+context "math()"
+snippet 'PMF' "probability mass function" iAr
+p_{${1/([a-zA-Z]+)(\=[^,\|]*)?([,\|])?/\U$1\E(?3:$3)/g}}(${1:x})
+endsnippet
+
+context "math()"
+snippet 'PDF' "probability dense function" iAr
+f_{${1/([a-zA-Z]+)(\=[^,\|]*)?([,\|])?/\U$1\E(?3:$3)/g}}(${1:x})
+endsnippet
+
+context "math()"
+snippet 'CDF' "cumulative distribution function" iAr
+F_{${1/([a-zA-Z]+)(\=[^,\|]*)?([,\|])?/\U$1\E(?3:$3)/g}}(${1:x})
+endsnippet
+
+context "math()"
+snippet bino "\binomial" iA
+\binom{$1}{$2}
+endsnippet
+
+context "math()"
+snippet cap "\cap" iA
+\cap
+endsnippet
+
+context "math()"
+snippet cup "\cup" iA
+\cup
+endsnippet
+
+priority 100
+context "math()"
+snippet oset "overset" iA
+\overset{$2}{${1:${VISUAL}}}
+endsnippet
+
+priority 100
+context "math()"
+snippet uset "underset" iA
+\underset{$2}{${1:${VISUAL}}}
+endsnippet
+
+priority 200
+context "math()"
+snippet '(\\?[\w=]+)oset' "overset" iAr
+\overset{$1}{`!p snip.rv = match.group(1)`}
+endsnippet
+
+priority 200
+context "math()"
+snippet '(\\?[\w=]+)uset' "underset" iAr
+\underset{$1}{`!p snip.rv = match.group(1)`}
+endsnippet
+
+priority 300
+context "math()"
+snippet '(&)(\\?[\w=]+)oset' "overset" iAr
+\overset{$1}`!p snip.rv = match.group(1)`{`!p snip.rv = match.group(2)`}
+endsnippet
+
+priority 300
+context "math()"
+snippet '(&)(\\?[\w=]+)uset' "underset" iAr
+\underset{$1}`!p snip.rv = match.group(1)`{`!p snip.rv = match.group(2)`}
+endsnippet
+
+context "math()"
+snippet pm "plus minus" iA
+\pm
+endsnippet
+
+priority 100
+context "math()"
+snippet mp "minus plus" iA
+\mp
+endsnippet
+
+context "math()"
+snippet sum "\sum" iA
+\sum_{${1:${2:i}=${3:1}}}^{${4:n}} ${0:${VISUAL}}
+endsnippet
+
+context "math()"
+snippet prod "\prod" iA
+\prod_{${1:${2:i}=${3:1}}}^{${4:n}} ${0:${VISUAL}}
+endsnippet
+
+context "math()"
+snippet mean "expectation" iA
+\operatorname{E}[${1:${VISUAL}}]
+endsnippet
+
+context "math()"
+snippet var "variance" iA
+\operatorname{var}(${1:${VISUAL}})
+endsnippet
+
+context "math()"
+snippet cov "covariance" iA
+\operatorname{cov}(${1:${VISUAL}})
+endsnippet
+

@@ -1,0 +1,172 @@
+snippet prea "fast preamble" bA
+\ProvidesPackage{prea}
+
+% Chinese Support
+% \usepackage{ctex}
+
+\usepackage[a4paper, margin=1in]{geometry}
+
+% Set Font - Times New Roman
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\usepackage{indentfirst}
+
+\usepackage{multicol}
+\setlength{\columnsep}{1cm}
+
+% increase the row height of a single row: \addstackgap{}
+\usepackage{stackengine}
+
+\usepackage{amsmath, amssymb, amsthm,  mathtools}
+\usepackage{aligned-overset}
+\usepackage{verbatim}
+
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage[center]{caption}
+\usepackage{wrapstuff}
+\usepackage{subfig}
+\renewcommand{\thesubfigure}{Figure \arabic{subfigure}}
+\captionsetup[subfigure]{labelformat=simple, labelsep=colon}
+
+\usepackage{hyperref}
+
+\usepackage[backend=biber]{biblatex}
+% \addbibresource{citation.bib}
+
+\usepackage{subfiles}
+
+% Differential Sign
+\newcommand{\dif}{\ensuremath{\operatorname{d}\!}}
+
+% Define \figref command
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+% Define \tabref command
+\newcommand{\tabref}[1]{\tablename~\ref{#1}}
+
+% Listing Package Settings
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+% Trigonometric and Hyperbolic Functions Supplements
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arcosh}{arccosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\arsech}{arsech}
+\DeclareMathOperator{\arcsch}{arcsch}
+\DeclareMathOperator{\arcoth}{arcoth} 
+
+% Tikz Packages
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+endsnippet
+
+
+snippet qmake "quick make main.tex" bA
+%! TEX program=xelatex
+\documentclass[12pt]{article}
+
+\usepackage{prea}
+
+\title{$1}
+\author{${2:Jalen Lv}}
+\date{`date +%F`}
+
+\begin{document}
+\maketitle
+
+$3
+
+% \printbibliography
+
+\end{document}
+endsnippet
+
+snippet name "name" i
+软卓 202330551151 吕齐明
+endsnippet
+
+snippet subf "subfile preamble" bA
+\documentclass[../main.tex]{subfiles}
+
+\graphicspath{{\subfix{../images/}}}
+
+\begin{document}
+
+$0
+
+\end{document}
+endsnippet
+
+snippet qchoice "quickly making choice template" bA
+${1:Description} \\\\
+\addstackgap[\baselineskip] {
+    \begin{tabular}{l l}
+        A. \addstackgap{$2} \quad & B. \addstackgap{$3} \\\\
+        C. \addstackgap{$4} \quad & D. \addstackgap{$5}
+    \end{tabular}
+} \\\\ Answer: \emph{$6}
+
+\textbf{解：}$0
+endsnippet
+
+
+
+
+
+
+
+
+
+
+
+
+
+

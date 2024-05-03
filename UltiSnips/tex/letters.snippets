@@ -1,0 +1,276 @@
+# ------------------------------------------------------------- #
+
+global !p
+def math():
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return x != '0' and x != '0'
+
+endglobal
+
+# ------------------------------------------------------------- #
+
+priority 100
+context "math()"
+snippet alp "\alpha" iA
+\alpha
+endsnippet
+
+priority 100
+context "math()"
+snippet bet "\beta" iA
+\beta
+endsnippet
+
+priority 100
+context "math()"
+snippet gam "\gamma" iA
+\gamma
+endsnippet
+
+priority 100
+context "math()"
+snippet del "\delta" iA
+\delta
+endsnippet
+
+
+priority 100
+context "math()"
+snippet eps "\epsilon" iA
+\epsilon
+endsnippet
+
+priority 100
+context "math()"
+snippet zet "\zeta" iA
+\zeta
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|h|b|z)eta' "\eta" iAr
+\eta
+endsnippet
+
+priority 100
+context "math()"
+snippet the "\theta" iA
+\theta
+endsnippet
+
+priority 100
+context "math()"
+snippet iot "\iota" iA
+\iota
+endsnippet
+
+priority 100
+context "math()"
+snippet kap "\kappa" iA
+\kappa
+endsnippet
+
+priority 100
+context "math()"
+snippet lam "\lambda" iA
+\lambda
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|r)mu' "\mu" iAr
+\mu
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|r)nu' "\nu" iAr
+\nu
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\)xi' "\xi" iAr
+\xi
+endsnippet
+
+priority 100
+context "math()"
+snippet '\\xii' "x_i" iAr
+x_i
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|r)pi' "\pi" iAr
+\pi
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|r)rho' "\rho" iAr
+\rho
+endsnippet
+
+priority 100
+context "math()"
+snippet sig "\sigma" iA
+\sigma
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|r)tau' "\tau" iAr
+\tau
+endsnippet
+
+priority 100
+context "math()"
+snippet ups "\upsilon" iA
+\upsilon
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\|r)phi' "\phi" iAr
+\phi
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\)chi' "\chi" iAr
+\chi
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\)psi' "\psi" iAr
+\psi
+endsnippet
+
+priority 100
+context "math()"
+snippet ome "\omega" iA
+\omega
+endsnippet
+
+priority 200
+context "math()"
+snippet dig "\digamma" iA
+\digamma
+endsnippet
+
+priority 200
+context "math()"
+snippet veps "\varepsilon" iA
+\varepsilon
+endsnippet
+
+priority 200
+context "math()"
+snippet vkap "\varkappa" iA
+\varkappa
+endsnippet
+
+priority 200
+context "math()"
+snippet vphi "\varphi" iA
+\varphi
+endsnippet
+
+priority 200
+context "math()"
+snippet vpi "\varpi" iA
+\varpi
+endsnippet
+
+priority 200
+context "math()"
+snippet vrho "\varrho" iA
+\varrho
+endsnippet
+
+priority 200
+context "math()"
+snippet vsig "\varsigma" iA
+\varsigma
+endsnippet
+
+priority 200
+context "math()"
+snippet vthe "\vartheta" iA
+\vartheta
+endsnippet
+
+context "math()"
+snippet Gam "\Gamma" iA
+\Gamma
+endsnippet
+
+context "math()"
+snippet Del "\Delta" iA
+\Delta
+endsnippet
+
+context "math()"
+snippet Lam "\Lambda" iA
+\Lambda
+endsnippet
+
+context "math()"
+snippet Phi "\Phi" iA
+\Phi
+endsnippet
+
+context "math()"
+snippet Pi "\Phi" iA
+\Phi
+endsnippet
+
+context "math()"
+snippet Psi "\Psi" iA
+\Psi
+endsnippet
+
+context "math()"
+snippet Sig "\Sigma" iA
+\Sigma
+endsnippet
+
+context "math()"
+snippet The "\Theta" iA
+\Theta
+endsnippet
+
+context "math()"
+snippet Ups "\Upsilon" iA
+\Upsilon
+endsnippet
+
+context "math()"
+snippet Xi "\Xi" iA
+\Xi
+endsnippet
+
+priority 100
+context "math()"
+snippet '\\Xii' "X_i" iAr
+X_i
+endsnippet
+
+context "math()"
+snippet Ome "\Omega" iA
+\Omega
+endsnippet
+
+context "math()"
+snippet nab "\nabla" iA
+\nabla
+endsnippet
+
