@@ -63,3 +63,8 @@ vim.opt.shortmess = "I"
 vim.opt.spell = true
 -- Set the language for spell checking: en_us, cjk
 vim.opt.spelllang = { "en_us", "cjk" }
+
+-- Neovide settings
+if vim.g.neovide then
+	vim.o.guifont = "JetBrainsMono Nerd Font:h12"
+end
