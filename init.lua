@@ -1,11 +1,11 @@
 -- [[ Setting options ]]
-require('basic.vim-settings')
+require("basic.vim-settings")
 
 -- [[ Basic Keymaps ]]
-require('basic.keybindings')
+require("basic.keybindings")
 
 -- [[ Basic Autocommands ]]
-require('basic.autocommands')
+require("basic.autocommands")
 
 -- [[ Configure and install plugins ]]
-require('lazy').setup('plugins')
+require("lazy").setup("plugins")
