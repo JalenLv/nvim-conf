@@ -8,17 +8,17 @@ return {
 			vim.cmd([[colorscheme tokyonight-night]])
 		end,
 	},
-	{
-		"utilyre/barbecue.nvim",
-		version = "*",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {
-			theme = "tokyonight",
-		},
-	},
+	-- {
+	-- 	"utilyre/barbecue.nvim",
+	-- 	version = "*",
+	-- 	dependencies = {
+	-- 		"SmiteshP/nvim-navic",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- 	opts = {
+	-- 		theme = "tokyonight",
+	-- 	},
+	-- },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },

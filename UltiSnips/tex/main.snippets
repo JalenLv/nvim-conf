@@ -330,13 +330,31 @@ endsnippet
 priority 200
 context "math()"
 snippet dint "\int_{}^{} \dif" iA
-\int_{${1:-\infty}}^{${2:+\infty}} ${3:${VISUAL}} \dif ${4:x}
+\int_{${1:-\infty}}^{${2:+\infty}} ${3:${VISUAL}} \dif ${0:x}
+endsnippet
+
+priority 200
+context "math()"
+snippet oint "\oint_{}^{} \dif" iA
+\oint_{${1:C}} ${2:${VISUAL}} \dif ${0:x}
+endsnippet
+
+priority 300
+context "math()"
+snippet o_{in}t "oiinT->o_{in}t \oiint" iA
+\oiint_{${1:C}} ${2:${VISUAL}} \dif ${3:x} \dif ${4:y}
+endsnippet
+
+priority 300
+context "math()"
+snippet o_{in}T "oiinT->o_{in}T \oiint with substack" iA
+\underset{${1:\substack{$2}}}{\oiint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}}
 endsnippet
 
 priority 200
 context "math()"
 snippet "(?<!\\)iint" "\int\int \dif \dif" iAr
-\iint ${1:${VISUAL}} \dif ${2:x}\dif ${3:y}
+\iint_{$1} ${2:${VISUAL}} \dif ${3:${4:x}\dif ${0:y}}
 endsnippet
 
 priority 300
@@ -739,5 +757,10 @@ endsnippet
 context "math()"
 snippet cov "covariance" iA
 \operatorname{cov}(${1:${VISUAL}})
+endsnippet
+
+context "math()"
+snippet arc "\wideparen{}" i
+\wideparen{${1:${VISUAL}}}
 endsnippet
 
