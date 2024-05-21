@@ -56,7 +56,7 @@ endsnippet
 
 priority 100
 context "math()"
-snippet '(?<!\\)([a-zA-Z])([a-zA-Z])\2' "auto subscript3" iAr
+snippet '(?<!\\|b|B)([a-zA-Z])([a-zA-Z])\2' "auto subscript3" iAr
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
@@ -292,14 +292,8 @@ snippet ddf "2st order differentiation" iA
 \frac{\dif^2 ${1:${VISUAL:y}}}{\dif ${2:x}^2}\,
 endsnippet
 
-priority 150
 context "math()"
-snippet 'dd([a-zA-Z])' "differentiation" iAr
-\frac{\dif ${VISUAL}}{\dif `!p snip.rv = match.group(1)`}\,
-endsnippet
-
-context "math()"
-snippet par "\partial" iA
+snippet pat "\partial" iA
 \partial
 endsnippet
 
@@ -335,8 +329,20 @@ endsnippet
 
 priority 200
 context "math()"
-snippet "(?<!\\)iint" "\int\int \dif \dif" iAr
-\iint ${1:${VISUAL}} \dif ${2:x}\dif ${3:y}
+snippet "(?<!\\)oint" "\oint_{} \dif" iAr
+\oint_{${1:L}} ${2:${VISUAL}} \dif ${3:x}
+endsnippet
+
+priority 200
+context "math()"
+snippet "(?<!\\|o)iint" "\int\int \dif \dif" iAr
+\iint_{$1} ${2:${VISUAL}} \dif ${3:${4:x}\dif ${5:y}}
+endsnippet
+
+priority 300
+context "math()"
+snippet iinT "iinT->\iint with substack" iA
+\underset{${1:\substack{$2}}}{\iint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}}
 endsnippet
 
 priority 300
@@ -347,20 +353,32 @@ endsnippet
 
 priority 300
 context "math()"
-snippet d_{in}T "diinT->d_{in}T \iint with substack" iA
-\underset{${1:\substack{$2}}}{\iint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}}
+snippet "(?<!\\)o_{in}t" "oiint->o_{in}t \oiint_{}" iAr
+\oiint_{${1:L}} ${2:${VISUAL}} \dif ${3:${4:x} \dif ${5:y}}
+endsnippet
+
+priority 300
+context "math()"
+snippet o_{in}T "oiinT->o_{in}T \oiint with substack" iA
+\underset{${1:\substack{$2}}}{\oiint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}}
+endsnippet
+
+priority 300
+context "math()"
+snippet i_{in}t "iiint->i_{in}t->\iiint_{}" iAr
+\iiint_{$1} ${2:${VISUAL}} \dif ${3:${4:x}\dif ${5:y}\dif ${6:z}}
+endsnippet
+
+priority 300
+context "math()"
+snippet i_{in}T "iiinT->i_{in}T \iiint with substack" iA
+\underset{${1:\substack{$2}}}{\iiint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}\dif ${7:z}}
 endsnippet
 
 priority 300
 context "math()"
 snippet d_{ii}nt "diiint->d_{in}it \int_{}^{}*3" iA
 \int_{${1:-\infty}}^{${2:+\infty}} \int_{${3:-\infty}}^{${4:+\infty}} \int_{${5:-\infty}}^{${6:+\infty}} ${7:${VISUAL}} \dif ${8:x}\dif ${9:y}\dif ${10:z}
-endsnippet
-
-priority 300
-context "math()"
-snippet d_{ii}nT "diiinT->d_{in}iT \iint with substack" iA
-\underset{${1:\substack{$2}}}{\iiint} ${3:${VISUAL}} \dif ${4:${5:x}\dif ${6:y}\dif ${7:z}}
 endsnippet
 
 context "math()"
@@ -739,5 +757,10 @@ endsnippet
 context "math()"
 snippet cov "covariance" iA
 \operatorname{cov}(${1:${VISUAL}})
+endsnippet
+
+context "math()"
+snippet arc "\wideparen{}" i
+\wideparen{${1:${VISUAL}}}
 endsnippet
 

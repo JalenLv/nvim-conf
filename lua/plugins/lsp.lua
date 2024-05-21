@@ -48,6 +48,8 @@ return {
 				cmd = {
 					"clangd",
 					"--header-insertion=never",
+					-- "--query-driver=/usr/bin/g++",
+					"--include-directory=/usr/include/c++/11",
 					-- "--no-cuda-version-check",
 				},
 				settings = {
