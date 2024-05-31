@@ -45,23 +45,23 @@ return {
 				capabilities = vim.tbl_deep_extend("force", capabilities, {
 					offsetEncoding = { "utf-16" },
 				}),
-				cmd = {
-					"clangd",
-					"--header-insertion=never",
-					-- "--query-driver=/usr/bin/g++",
-					"--include-directory=/usr/include/c++/11",
-					-- "--no-cuda-version-check",
-				},
-				settings = {
-					clangd = {
-						InlayHints = {
-							Designators = true,
-							Enabled = true,
-							ParameterNames = true,
-							DeducedTypes = true,
-						},
-					},
-				},
+				-- cmd = {
+				-- 	"clangd",
+				-- 	"--header-insertion=never",
+				-- 	-- "--query-driver=/usr/bin/g++",
+				-- 	-- "--include-directory=/usr/include/c++/11",
+				-- 	-- "--no-cuda-version-check",
+				-- },
+				-- settings = {
+				-- 	clangd = {
+				-- 		InlayHints = {
+				-- 			Designators = true,
+				-- 			Enabled = true,
+				-- 			ParameterNames = true,
+				-- 			DeducedTypes = true,
+				-- 		},
+				-- 	},
+				-- },
 			},
 			cpptools = {},
 			-- cmake
