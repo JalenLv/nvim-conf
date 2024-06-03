@@ -49,7 +49,7 @@ return {
 					"clangd",
 					"--header-insertion=never",
 					-- "--query-driver=/usr/bin/g++",
-					"--include-directory=/usr/include/c++/11",
+					-- "--include-directory=/usr/include/c++/11",
 					-- "--no-cuda-version-check",
 				},
 				settings = {
@@ -90,6 +90,7 @@ return {
 		vim.list_extend(ensure_installed, {
 			"clang-format",
 			"cmake-language-server",
+			"rust-analyzer",
 		})
 
 		require("mason").setup({

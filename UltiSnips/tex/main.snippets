@@ -365,7 +365,7 @@ endsnippet
 
 priority 300
 context "math()"
-snippet i_{in}t "iiint->i_{in}t->\iiint_{}" iAr
+snippet i_{in}t "iiint->i_{in}t->\iiint_{}" iA
 \iiint_{$1} ${2:${VISUAL}} \dif ${3:${4:x}\dif ${5:y}\dif ${6:z}}
 endsnippet
 
@@ -736,12 +736,12 @@ endsnippet
 
 context "math()"
 snippet sum "\sum" iA
-\sum_{${1:${2:i}=${3:1}}}^{${4:n}} ${0:${VISUAL}}
+\sum_{${1:${2:n}=${3:1}}}^{${4:\infty}} ${5:${VISUAL}}
 endsnippet
 
 context "math()"
 snippet prod "\prod" iA
-\prod_{${1:${2:i}=${3:1}}}^{${4:n}} ${0:${VISUAL}}
+\prod_{${1:${2:n}=${3:1}}}^{${4:\infty}} ${5:${VISUAL}}
 endsnippet
 
 context "math()"

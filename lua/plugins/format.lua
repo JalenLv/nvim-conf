@@ -28,13 +28,24 @@ return {
 			lsp_fallback = true,
 		},
 
+		formatters = {
+			rustfmt = {
+				command = "rustfmt",
+				args = {
+					"--config",
+					"tab_spaces=2",
+				},
+			},
+		},
+
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "isort", "black", "ruff" },
+			python = { "black", "ruff" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			cuda = { "clang-format" },
 			cmake = { "cmakelang" },
+			rust = { "rustfmt" },
 			-- tex = { "texlab" },
 		},
 	},

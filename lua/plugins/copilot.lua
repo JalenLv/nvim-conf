@@ -5,7 +5,7 @@ return {
 	config = function()
 		local accept = nil
 		if vim.fn.has("mac") == 1 then
-			accept = "<D-l>"
+			accept = "¬"
 		elseif vim.fn.has("unix") == 1 then
 			accept = "<M-l>"
 		elseif vim.fn.has("win32") == 1 or vim.fn.has("wim64") == 1 then
