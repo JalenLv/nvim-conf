@@ -9,6 +9,11 @@ return {
 		end,
 	},
 	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	priority = 1000,
+	-- },
+	-- {
 	-- 	"utilyre/barbecue.nvim",
 	-- 	version = "*",
 	-- 	dependencies = {

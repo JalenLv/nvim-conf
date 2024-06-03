@@ -140,7 +140,7 @@ endsnippet
 priority 100
 context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
-\overline{`!p snip.rv=match.group(1)`}
+\bar{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
@@ -762,5 +762,15 @@ endsnippet
 context "math()"
 snippet arc "\wideparen{}" i
 \wideparen{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet ceil "left right ceiling" iA
+\left\lceil ${1:${VISUAL}} \right\rceil
+endsnippet
+
+context "math()"
+snippet floor "left right floor" iA
+\left\lfloor ${1:${VISUAL}} \right\rfloor
 endsnippet
 
