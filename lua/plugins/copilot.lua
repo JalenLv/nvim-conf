@@ -8,6 +8,7 @@ return {
 			accept = "¬"
 		elseif vim.fn.has("unix") == 1 then
 			accept = "<M-l>"
+			vim.api.nvim_set_keymap("i", "¬", "<M-l>", { silent = true })
 		elseif vim.fn.has("win32") == 1 or vim.fn.has("wim64") == 1 then
 			accept = "<A-l>"
 		end
