@@ -217,7 +217,7 @@ endsnippet
 priority 200
 context "math()"
 snippet 2lim "bivariable limit" i
-\lim_{\substack{${1:x} \to ${2:0} \\ ${3:y} \to ${4:0}}} $0
+\lim_{\substack{${1:x} \to ${2:0} \\\\ ${3:y} \to ${4:0}}} $0
 endsnippet
 
 context "math()"
@@ -272,6 +272,12 @@ priority 200
 context "math()"
 snippet imp "implies" iA
 \implies
+endsnippet
+
+priority 300
+context "math()"
+snippet nimp "does not imply" iA
+\nimply
 endsnippet
 
 priority 300
