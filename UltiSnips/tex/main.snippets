@@ -179,12 +179,12 @@ endsnippet
 
 context "math()"
 snippet "(\\?\w+)(';|;')" "vector postfix" riA
-\overrightarrow{`!p snip.rv=match.group(1)`$1}
+\overrightarrow{`!p snip.rv=match.group(1)`}
 endsnippet 
 
 context "math()"
 snippet "(\\?\w+)(,\.|\.,)" "vector postfix" riA
-\vec{`!p snip.rv=match.group(1)`$1}
+\vec{`!p snip.rv=match.group(1)`}
 endsnippet 
 
 context "math()"
@@ -336,7 +336,7 @@ endsnippet
 priority 100
 context "math()"
 snippet '(?<!\\|i)int' "\int \dif" iAr
-\int ${1:${VISUAL}} \dif ${2:x}
+\int_{$1} ${2:${VISUAL}} \dif ${3:x}
 endsnippet
 
 priority 200
