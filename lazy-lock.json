@@ -36,6 +36,8 @@
   "texpresso.vim": { "branch": "main", "commit": "1cc949fde8ed3220968039b6b1b6ccdd9f475087" },
   "todo-comments.nvim": { "branch": "main", "commit": "51e10f838e84b4756c16311d0b1ef0972c6482d2" },
   "tokyonight.nvim": { "branch": "main", "commit": "81c867c5f638597a82c82094dcb90ed42444dabc" },
+  "typst-preview.nvim": { "branch": "master", "commit": "15eaaffc0a2d8cd871f485f399d1d67ed3322a0b" },
+  "typst.vim": { "branch": "main", "commit": "d9a7650e76c85f8ba437e056d08dd43b01b8bfd6" },
   "ultisnips": { "branch": "master", "commit": "49dc8cb2086db19d385791c8e1635723b0fd95c7" },
   "vimtex": { "branch": "master", "commit": "8ed94566e6fe3f5b163131dc374d224d2d320db7" },
   "which-key.nvim": { "branch": "main", "commit": "0099511294f16b81c696004fa6a403b0ae61f7a0" }

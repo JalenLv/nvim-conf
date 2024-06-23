@@ -47,6 +47,7 @@ return {
 			cmake = { "cmakelang" },
 			rust = { "rustfmt" },
 			-- tex = { "texlab" },
+			typst = { "typstyle" },
 		},
 	},
 }
