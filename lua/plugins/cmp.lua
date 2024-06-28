@@ -10,7 +10,7 @@ return {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"micangl/cmp-vimtex",
-		"quangnguyen30192/cmp-nvim-ultisnips",
+		-- "quangnguyen30192/cmp-nvim-ultisnips",
 	},
 	opts = function()
 		-- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
