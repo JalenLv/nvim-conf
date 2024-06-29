@@ -1,5 +1,13 @@
 return {
-	"numToStr/Comment.nvim", -- 'gc' to comment visual regions/lines
+	{ -- 'gc' to comment visual regions/lines
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+
+			local ft = require("Comment.ft")
+			ft({ "cuda" }, ft.get("c"))
+		end,
+	},
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {

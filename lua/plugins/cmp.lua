@@ -20,7 +20,7 @@ return {
 		local defaults = require("cmp.config.default")()
 
 		return {
-			auto_brackets = { "python", "c", "cpp", "cuda", "cmake", "rust" }, -- configure any filetype to auto add brackets
+			-- auto_brackets = { "python", "c", "cpp", "cuda", "cmake", "rust" }, -- configure any filetype to auto add brackets
 
 			snippet = {
 				expand = function(args)
