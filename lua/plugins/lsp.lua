@@ -84,7 +84,7 @@ return {
 				},
 			},
 			stylua = {},
-			-- typist
+			-- typst
 			tinymist = {
 				single_file_support = true,
 				root_dir = function()
@@ -92,13 +92,34 @@ return {
 				end,
 				settings = {},
 			},
+			-- rust
+			rust_analyzer = {
+				settings = {
+					["rust-analyzer"] = {
+						imports = {
+							granularity = {
+								group = "module",
+							},
+							prefix = "self",
+						},
+						cargo = {
+							buildScripts = {
+								enable = true,
+							},
+						},
+						procMacro = {
+							enable = true,
+						},
+					},
+				},
+			},
 		}
 
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			"clang-format",
 			"cmake-language-server",
-			"rust-analyzer",
+			-- "rust-analyzer",
 		})
 
 		require("mason").setup({
