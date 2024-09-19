@@ -139,7 +139,7 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])bar" "bar" riA
+snippet "(\\?\w+)bar" "bar" riA
 \bar{`!p snip.rv=match.group(1)`}
 endsnippet
 
@@ -151,7 +151,7 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])til" "\tilde" riA
+snippet "(\\?\w+)til" "\tilde" riA
 \tilde{`!p snip.rv=match.group(1)`}
 endsnippet
 
@@ -163,7 +163,7 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])hat" "hat" riA
+snippet "(\\?\w+)hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
@@ -495,9 +495,9 @@ snippet B| "\Big|_{}^{}" iA
 ${1:\Big|}_{$2}^{$3}$0
 endsnippet
 
-priority 100
+priority 150
 context "math()"
-snippet '(?<!\\|r|c)(sin|cos|tan|cot|sec|csc|ln|log|exp|grad|arg|max|min)' "auto backslash" iAr
+snippet '(?<!\\|r|c)(sin|cos|tan|cot|sec|csc|ln|log|exp|grad|arg|max|min|neg|land|lor|to|iff)' "auto backslash" iAr
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
