@@ -24,6 +24,12 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+-- Use CTRL+<arrow keys> to resize the windows
+vim.keymap.set("n", "<C-Up>", "2<C-w>+", { desc = "Increase window height", noremap = true, silent = true })
+vim.keymap.set("n", "<C-Down>", "2<C-w>-", { desc = "Decrease window height", noremap = true, silent = true })
+vim.keymap.set("n", "<C-Left>", "3<C-w><", { desc = "Decrease window width", noremap = true, silent = true })
+vim.keymap.set("n", "<C-Right>", "3<C-w>>", { desc = "Increase window width", noremap = true, silent = true })
+
 -- Keybindings to create new terminal buffer
 -- and disable spell checking in terminal buffers
 vim.keymap.set(

@@ -38,3 +38,8 @@ linux
 linux
 CMake
 camelCase
+fmt
+resize
+println
+struct
+i32
