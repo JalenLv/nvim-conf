@@ -1,3 +1,4 @@
+local colorscheme = require("plugins.colorscheme")
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: For more options, see `:help option-list`
@@ -69,7 +70,7 @@ if vim.g.neovide then
 	vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 end
 
--- Use virtual python environmant if on macOs
-if vim.fn.has("mac") == 1 then
-	vim.g.python3_host_prog = "/opt/anaconda3/bin/python"
-end
+-- Use virtual python environmant if on macOS
+-- if vim.fn.has("mac") == 1 then
+-- 	vim.g.python3_host_prog = "/opt/anaconda3/bin/python"
+-- end
