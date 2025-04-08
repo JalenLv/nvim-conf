@@ -58,7 +58,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 5
 
 -- Disable the default Vim startup message.
-vim.opt.shortmess = "I"
+vim.opt.shortmess:append("I")
 
 -- Enable spell checker
 vim.opt.spell = true
@@ -74,3 +74,7 @@ end
 -- if vim.fn.has("mac") == 1 then
 -- 	vim.g.python3_host_prog = "/opt/anaconda3/bin/python"
 -- end
+
+-- Disable "Press ENTER or type command to continue" prompt
+vim.opt.shortmess:append("T")
+-- vim.opt.cmdheight = 2

@@ -792,3 +792,25 @@ snippet floor "left right floor" iA
 \left\lfloor ${1:${VISUAL}} \right\rfloor
 endsnippet
 
+context "math()"
+snippet ems "\emptyset" iA
+\emptyset
+endsnippet
+
+snippet imf "inline math False" iA
+$ F $
+endsnippet
+
+snippet imt "inline math True" iA
+$ T $
+endsnippet
+
+context "math()"
+snippet mod "a \equiv b (mod c)" iA
+${1:a} \equiv ${2:b} \ (\text{mod}\  ${3:c})
+endsnippet
+
+context "math()"
+snippet MOD "a \equiv b (mod c) in align env" iA
+&\equiv ${1:b} \ (\text{mod}\  ${2:c}) \\\\
+endsnippet

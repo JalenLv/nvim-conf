@@ -33,7 +33,7 @@ return {
 				command = "rustfmt",
 				args = {
 					"--config",
-					"tab_spaces=2",
+					"tab_spaces=4",
 				},
 			},
 		},
