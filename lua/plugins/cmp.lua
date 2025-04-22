@@ -53,6 +53,7 @@ return {
 				{ name = "luasnip" },
 				{ name = "vimtex" },
 				{ name = "buffer" },
+				{ name = "lazydev", group_index = 0 },
 			},
 
 			-- experimental = {

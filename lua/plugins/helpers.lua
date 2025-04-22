@@ -24,10 +24,10 @@ return {
 			require("gitsigns").setup(opts)
 		end,
 	},
-	{
-		"kevinhwang91/nvim-hlslens",
-		opts = {},
-	},
+	-- {
+	-- 	"kevinhwang91/nvim-hlslens",
+	-- 	opts = {},
+	-- },
 	-- {
 	-- 	"petertriho/nvim-scrollbar",
 	-- 	dependencies = {

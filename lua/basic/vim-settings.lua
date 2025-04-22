@@ -28,6 +28,7 @@ vim.opt.undofile = true
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.wildignorecase = true
 
 vim.opt.signcolumn = "yes"
 
