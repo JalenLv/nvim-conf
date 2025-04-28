@@ -1,7 +1,9 @@
 return {
 	"hrsh7th/nvim-cmp",
 	version = false, -- last release is way too old
+
 	event = { "BufReadPre", "BufNewFile" },
+
 	dependencies = {
 		"L3MON4D3/LuaSnip",
 
@@ -12,9 +14,8 @@ return {
 		"micangl/cmp-vimtex",
 		-- "quangnguyen30192/cmp-nvim-ultisnips",
 	},
-	opts = function()
-		-- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
+	opts = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local defaults = require("cmp.config.default")()
@@ -33,18 +34,10 @@ return {
 			mapping = cmp.mapping.preset.insert({
 				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<S-CR>"] = cmp.mapping.confirm({
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = true,
-				}),
-				["<C-CR>"] = function(fallback)
-					cmp.abort()
-					fallback()
-				end,
 			}),
 
 			sources = {
@@ -53,14 +46,8 @@ return {
 				{ name = "luasnip" },
 				{ name = "vimtex" },
 				{ name = "buffer" },
-				{ name = "lazydev", group_index = 0 },
+				{ name = "lazydev" },
 			},
-
-			-- experimental = {
-			-- 	ghost_text = {
-			-- 		hl_group = "CmpGhostText",
-			-- 	},
-			-- },
 
 			sorting = defaults.sorting,
 		}

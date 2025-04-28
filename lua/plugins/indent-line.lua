@@ -3,6 +3,7 @@ return {
 	-- See `:help ibl`
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		dependencies = "HiPhish/rainbow-delimiters.nvim",
 		main = "ibl",
 		config = function()
 			local highlight = {
@@ -34,5 +35,4 @@ return {
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
 	},
-	"HiPhish/rainbow-delimiters.nvim",
 }

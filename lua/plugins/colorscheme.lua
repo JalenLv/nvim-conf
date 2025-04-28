@@ -46,8 +46,10 @@ return {
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			vim.opt.termguicolors = true
+			require("vercel").setup({})
+			local highlights = require("vercel").highlights.bufferline
 			require("bufferline").setup({
-				-- highlights = require("vercel").highlights.bufferline,
+				highlights = highlights,
 			})
 		end,
 	},
