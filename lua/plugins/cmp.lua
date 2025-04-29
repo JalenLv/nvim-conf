@@ -6,12 +6,15 @@ return {
 
 	dependencies = {
 		"L3MON4D3/LuaSnip",
+		"onsails/lspkind.nvim",
 
-		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
 		"micangl/cmp-vimtex",
+		"saadparwaiz1/cmp_luasnip",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/cmp-calc",
 		-- "quangnguyen30192/cmp-nvim-ultisnips",
 	},
 
@@ -19,10 +22,9 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local defaults = require("cmp.config.default")()
+		local lspkind = require("lspkind")
 
 		return {
-			-- auto_brackets = { "python", "c", "cpp", "cuda", "cmake", "rust" }, -- configure any filetype to auto add brackets
-
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
@@ -37,19 +39,71 @@ return {
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+				["<CR>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						if luasnip.expandable() then
+							luasnip.expand()
+						else
+							cmp.confirm({ select = true })
+						end
+					else
+						fallback()
+					end
+				end),
+
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if luasnip.locally_jumpable(1) then
+						luasnip.jump(1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if luasnip.locally_jumpable(-1) then
+						luasnip.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
 			}),
 
 			sources = {
 				{ name = "nvim_lsp" },
-				{ name = "path" },
-				{ name = "luasnip" },
+				{ name = "lazydev", group_index = 0 }, -- set group index to 0 to skip loading LuaLS completions
 				{ name = "vimtex" },
+
+				{ name = "luasnip" },
+
+				{ name = "path" },
 				{ name = "buffer" },
-				{ name = "lazydev" },
+				{ name = "calc" },
 			},
 
 			sorting = defaults.sorting,
+
+			formatting = {
+				format = lspkind.cmp_format({
+					mode = "symbol_text", -- show symbol and text
+					menu = {
+						nvim_lsp = "[LSP]",
+						lazydev = "[LazyDev]",
+						vimtex = "[Vimtex]",
+
+						luasnip = "[LuaSnip]",
+
+						path = "[Path]",
+						buffer = "[Buffer]",
+						calc = "[Calc]",
+						cmdline = "[Cmd]",
+					},
+				}),
+			},
+
+			view = {
+				entries = { name = "custom", selection_order = "near_cursor" },
+			},
 		}
 	end,
 
@@ -63,16 +117,21 @@ return {
 		local Kind = cmp.lsp.CompletionItemKind
 		cmp.setup(opts)
 
-		cmp.event:on("confirm_done", function(event)
-			if not vim.tbl_contains(opts.auto_brackets or {}, vim.bo.filetype) then
-				return
-			end
-			local entry = event.entry
-			local item = entry:get_completion_item()
-			if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) then
-				local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
-				vim.api.nvim_feedkeys(keys, "i", true)
-			end
-		end)
+		-- Completions for `/`
+		require("cmp").setup.cmdline({ "/" }, {
+			mapping = require("cmp").mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		-- Completions for `:`
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "path" },
+				{ name = "cmdline" },
+			},
+		})
 	end,
 }

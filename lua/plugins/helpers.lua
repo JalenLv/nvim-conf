@@ -93,7 +93,7 @@ return {
 		config = function()
 			-- Extend and create a/i text objects
 			require("mini.ai").setup()
-      --
+
       -- Move any selection in any direction
       -- Use <M-h/j/k/l> to move selected text/lines
       require("mini.move").setup()

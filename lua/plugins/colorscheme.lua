@@ -43,7 +43,10 @@ return {
 	{
 		"akinsho/bufferline.nvim",
 		version = "*",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		dependencies = {
+		  "nvim-tree/nvim-web-devicons",
+      "tiesen243/vercel.nvim",
+		},
 		config = function()
 			vim.opt.termguicolors = true
 			require("vercel").setup({})
