@@ -79,3 +79,4 @@ end
 -- Disable "Press ENTER or type command to continue" prompt
 vim.opt.shortmess:append("T")
 -- vim.opt.cmdheight = 2
+

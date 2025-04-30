@@ -17,12 +17,18 @@ return {
 					ls.expand()
 				elseif ls.locally_jumpable(1) then
 					ls.jump(1)
+        else
+          -- If no snippet is active, insert a tab character
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 				end
 			end, { silent = true })
 
 			vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
 				if ls.jumpable(-1) then
 					ls.jump(-1)
+        else
+          -- If no snippet is active, insert a Shift-Tab character
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
 				end
 			end, { silent = true })
 
@@ -30,6 +36,9 @@ return {
       vim.keymap.set({ "i", "s" }, "<C-K>", function()
         if ls.choice_active() then
           ls.change_choice(1)
+        else
+          -- If no choice is active, insert a Ctrl-K character
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-K>", true, false, true), "n", false)
         end
       end, { silent = true })
 		end,
