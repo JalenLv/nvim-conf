@@ -131,6 +131,7 @@ return {
 			sources = {
 				{ name = "path" },
 				{ name = "cmdline" },
+        { name = "lazydev" },
 			},
 		})
 	end,
