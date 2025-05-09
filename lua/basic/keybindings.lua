@@ -32,18 +32,18 @@ vim.keymap.set("n", "<C-Right>", "3<C-w>>", { desc = "Increase window width", no
 
 -- Keybindings to create new terminal buffer
 -- and disable spell checking in terminal buffers
-vim.keymap.set(
-	"n",
-	"<leader>tv",
-	"<cmd>vs<CR><cmd>te<CR><cmd>setlocal nospell<CR>",
-	{ desc = "Create a [T]erminal on the [V]ertical-split tab" }
-)
-vim.keymap.set(
-	"n",
-	"<leader>ts",
-	"<cmd>sp<CR><cmd>te<CR><cmd>setlocal nospell<CR>",
-	{ desc = "Create a [T]erminal on the [S]plit tab" }
-)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>tv",
+-- 	"<cmd>vs<CR><cmd>te<CR><cmd>setlocal nospell<CR>",
+-- 	{ desc = "Create a [T]erminal on the [V]ertical-split tab" }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>ts",
+-- 	"<cmd>sp<CR><cmd>te<CR><cmd>setlocal nospell<CR>",
+-- 	{ desc = "Create a [T]erminal on the [S]plit tab" }
+-- )
 
 -- Map j to gj and k to gk in normal mode and visual mode to move visual lines instead of actual lines
 vim.keymap.set("n", "j", "gj", { silent = true })

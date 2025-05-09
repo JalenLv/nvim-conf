@@ -65,6 +65,8 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		event = "BufReadPre",
 		config = function()
+      require("todo-comments").setup()
+
 			vim.keymap.set("n", "]]t", function()
 				require("todo-comments").jump_next({ keywords = { "TODO" } })
 			end, { desc = "Next [T]odo comment" })
@@ -82,8 +84,6 @@ return {
 			end, { desc = "Previous [F]ixme comment" })
 
 			vim.keymap.set("n", "<leader>st", "<cmd>TodoTelescope<CR>", { desc = "[S]earch [T]odo comments" })
-
-			require("todo-comments").setup()
 		end,
 	},
 	{

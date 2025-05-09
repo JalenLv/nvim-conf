@@ -35,7 +35,7 @@ return {
 		},
 	},
 	{
-		"tiesen243/vercel.nvim",
+		"JalenLv/vercel.nvim",
 		config = function()
 			require("vercel").colorscheme()
 		end,

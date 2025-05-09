@@ -1,3 +1,25 @@
+local function config_jdtls()
+	local config = {
+		-- cmd = { vim.fn.expand("~") .. "/.local/share/nvim/mason/bin/jdtls" },
+		-- root_dir = vim.fn.getcwd(),
+		-- root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+		init_options = {
+			bundles = {},
+		},
+	}
+
+	local java_debug =
+		"/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
+	local vscode_java_test = "/.local/share/nvim/mason/packages/java-test/extension/server/*.jar"
+	local bundles = {
+		vim.fn.glob(vim.fn.expand("~") .. java_debug, 1),
+	}
+	vim.list_extend(bundles, vim.split(vim.fn.glob(vim.fn.expand("~") .. vscode_java_test, 1), "\n"))
+	config.init_options.bundles = bundles
+
+	return config
+end
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -9,13 +31,13 @@ return {
 
 			{ -- Configures LuaLS for editing your Neovim config.
 				ft = "lua", -- only load on lua files
-        "folke/lazydev.nvim",
+				"folke/lazydev.nvim",
 				opts = {
 					library = {
 						-- See the configuration section for more details
 						-- Load luvit types when the `vim.uv` word is found
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-            { "nvim-dap-ui" },
+						{ "nvim-dap-ui" },
 					},
 				},
 			},
@@ -40,9 +62,10 @@ return {
 				clangd = {
 					cmd = {
 						"clangd",
-            "--clang-tidy",
+						"--clang-tidy",
 						"--header-insertion=never",
 					},
+					-- root_dir = vim.fn.getcwd(),
 				},
 
 				-- CMake
@@ -52,7 +75,7 @@ return {
 				pyright = {},
 
 				-- java
-				jdtls = {},
+				jdtls = config_jdtls(),
 
 				-- lua
 				lua_ls = {},
@@ -73,25 +96,15 @@ return {
 				},
 			}
 			require("mason-lspconfig").setup({
-				ensure_installed = vim.tbl_keys(servers or {}),
+				ensure_installed = vim.tbl_keys(servers),
 				automatic_installation = false,
 			})
 
-			-- Automatic server setup handler
-			require("mason-lspconfig").setup_handlers({
-				-- The first entry (without a key) will be the default handler
-				-- and will be called for each installed server that doesn't have
-				-- a dedicated handler.
-				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup(servers[server_name] or {})
-				end,
-
-				-- Next, you can provide a dedicated handler for specific servers.
-				-- For example, a handler override for the `rust_analyzer`:
-				-- ["rust_analyzer"] = function()
-				-- 	require("rust-tools").setup({})
-				-- end,
-			})
+			-- Now use vim.lsp.config() to setup the servers
+			vim.lsp.enable(vim.tbl_keys(servers))
+			for server_name, config in pairs(servers) do
+				vim.lsp.config(server_name, config)
+			end
 
 			-- Setup lspconfig
 			-- Enable inlay hints for all LSP servers
@@ -129,11 +142,7 @@ return {
 					map("<leader>ss", require("telescope.builtin").lsp_document_symbols, "Document [S]ymbols")
 
 					-- Fuzzy find all the symbols in your current workspace.
-					map(
-						"<leader>sS",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"Workspace [S]ymbols"
-					)
+					map("<leader>sS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace [S]ymbols")
 
 					-- Rename the variable under your cursor.
 					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")

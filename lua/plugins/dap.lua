@@ -99,7 +99,7 @@ return {
 			end, { desc = "Set [B]reakpoint" })
 			vim.keymap.set("n", "<Leader>dl", function()
 				dap.list_breakpoints()
-			end, { desc = "Set [B]reakpoint" })
+			end, { desc = "[L]ist Breakpoint" })
 			vim.keymap.set("n", "<Leader>dL", function()
 				dap.set_breakpoint(nil, nil, vim.fn.input("[L]og point message: "))
 			end, { desc = "Set [L]og Point" })

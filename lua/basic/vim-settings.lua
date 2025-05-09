@@ -20,8 +20,10 @@ vim.opt.showmode = false
 
 vim.opt.clipboard = "unnamedplus"
 
+-- Disable line wrapping
+vim.opt.wrap = false
 -- Smart wrap with correct indentation
-vim.opt.breakindent = true
+-- vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
@@ -54,7 +56,8 @@ vim.opt.expandtab = true
 -- Show substitution effects in a split window
 vim.opt.inccommand = "split"
 
-vim.opt.cursorline = true
+-- Disable current line highlighting
+vim.opt.cursorline = false
 
 vim.opt.scrolloff = 5
 
