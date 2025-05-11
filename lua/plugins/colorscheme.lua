@@ -1,63 +1,55 @@
 return {
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	opts = {},
-	-- 	config = function()
-	-- 		vim.cmd([[colorscheme tokyonight-night]])
-	-- 	end,
-	-- },
-	-- {
-	-- 	"catppuccin/nvim",
-	-- 	name = "catppuccin",
-	-- 	priority = 1000,
-	-- },
-	-- {
-	-- 	"utilyre/barbecue.nvim",
-	-- 	version = "*",
-	-- 	dependencies = {
-	-- 		"SmiteshP/nvim-navic",
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 	},
-	-- 	opts = {
-	-- 		theme = "tokyonight",
-	-- 	},
-	-- },
 	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			options = {
-				theme = "horizon",
-				-- theme = "auto",
-			},
-		},
+		"nvim-tree/nvim-web-devicons",
+		lazy = true,
 	},
 	{
-		"JalenLv/vercel.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
 		config = function()
-			require("vercel").colorscheme()
+			require("catppuccin").setup({
+				color_overrides = {
+					mocha = {
+						base = "#1b1b1b",
+						mantle = "#1b1b1b",
+						crust = "#1b1b1b",
+					},
+				},
+				integrations = {
+					mason = true,
+					nvim_surround = true,
+					which_key = true,
+				},
+			})
+			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"catppuccin/nvim",
+		},
+		opts = {
+			options = {
+				-- theme = "horizon",
+				theme = "catppuccin",
+			},
+		},
 	},
 	{
 		"akinsho/bufferline.nvim",
 		version = "*",
 		dependencies = {
-		  "nvim-tree/nvim-web-devicons",
-      "tiesen243/vercel.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"catppuccin/nvim",
 		},
 		config = function()
-			vim.opt.termguicolors = true
-			require("vercel").setup({})
-			local highlights = require("vercel").highlights.bufferline
+			local highlights = require("catppuccin.groups.integrations.bufferline").get()
 			require("bufferline").setup({
 				highlights = highlights,
 			})
 		end,
-	},
-	{
-		"nvim-tree/nvim-web-devicons",
-		lazy = true,
 	},
 }
