@@ -1,4 +1,3 @@
-local colorscheme = require("plugins.colorscheme")
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: For more options, see `:help option-list`
@@ -21,9 +20,9 @@ vim.opt.showmode = false
 vim.opt.clipboard = "unnamedplus"
 
 -- Disable line wrapping
-vim.opt.wrap = false
+vim.opt.wrap = true
 -- Smart wrap with correct indentation
--- vim.opt.breakindent = true
+vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
@@ -73,11 +72,6 @@ vim.opt.spelllang = { "en_us", "cjk" }
 if vim.g.neovide then
 	vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 end
-
--- Use virtual python environmant if on macOS
--- if vim.fn.has("mac") == 1 then
--- 	vim.g.python3_host_prog = "/opt/anaconda3/bin/python"
--- end
 
 -- Disable "Press ENTER or type command to continue" prompt
 vim.opt.shortmess:append("T")
