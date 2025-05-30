@@ -33,6 +33,6 @@ require("lazy").setup({
 		colorscheme = { "catppuccin" },
 	},
 	checker = {
-		enabled = true,
+		enabled = false,
 	},
 })
