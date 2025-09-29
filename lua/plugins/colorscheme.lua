@@ -46,7 +46,7 @@ return {
 			"catppuccin/nvim",
 		},
 		config = function()
-			local highlights = require("catppuccin.groups.integrations.bufferline").get()
+			local highlights = require("catppuccin.special.bufferline").get_theme()
 			require("bufferline").setup({
 				highlights = highlights,
 			})
