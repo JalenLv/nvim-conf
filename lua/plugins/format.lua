@@ -52,7 +52,7 @@ return {
 		vim.cmd("MasonToolsInstall")
 
 		formatters_by_ft = vim.tbl_deep_extend("force", formatters_by_ft, { rust = { "rustfmt" } })
-    formatters_by_ft["typst"] = vim.tbl_deep_extend('force', formatters_by_ft["typst"], { lsp_format = "prefer" })
+		formatters_by_ft["typst"] = vim.tbl_deep_extend("force", formatters_by_ft["typst"], { lsp_format = "prefer" })
 
 		-- Setup conform with the options
 		require("conform").setup({
@@ -71,24 +71,24 @@ return {
 			-- 	lsp_fallback = true,
 			-- },
 
-      default_format_opts = {
-        lsp_format = "fallback",
-      },
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
 
 			formatters = {
 				rustfmt = {
 					command = "rustfmt",
 					args = {
 						"--config",
-						"tab_spaces=2",
+						"tab_spaces=4",
 					},
 				},
-        cmakelang = {
-          command = "cmake-format",
-          args = {
-            "$FILENAME",
-          }
-        },
+				cmakelang = {
+					command = "cmake-format",
+					args = {
+						"$FILENAME",
+					},
+				},
 			},
 
 			formatters_by_ft = formatters_by_ft,
