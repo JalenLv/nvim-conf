@@ -113,13 +113,8 @@ return {
             -- Keybinding to toggle inlay hints
             vim.keymap.set("n", "<leader>ih", function()
                 local hints_enabled = vim.lsp.inlay_hint.is_enabled({0})
-                if hints_enabled then
-                    vim.lsp.inlay_hint.enable(false, {0})
-                    print("Inlay Hints Disabled")
-                else
-                    vim.lsp.inlay_hint.enable(true, {0})
-                    print("Inlay Hints Enabled")
-                end
+                vim.lsp.inlay_hint.enable(not hints_enabled, {0})
+                print("Inlay Hints " .. (hints_enabled and "Disabled" or "Enabled"))
             end, { desc = "Toggle [I]nlay [H]ints" })
 
 			-- Diagnostic keymaps
