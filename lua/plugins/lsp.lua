@@ -107,8 +107,20 @@ return {
 			end
 
 			-- Setup lspconfig
-			-- Enable inlay hints for all LSP servers
-			vim.lsp.inlay_hint.enable(true)
+			-- Disable inlay hints by default
+			vim.lsp.inlay_hint.enable(false)
+
+            -- Keybinding to toggle inlay hints
+            vim.keymap.set("n", "<leader>ih", function()
+                local hints_enabled = vim.lsp.inlay_hint.is_enabled({0})
+                if hints_enabled then
+                    vim.lsp.inlay_hint.enable(false, {0})
+                    print("Inlay Hints Disabled")
+                else
+                    vim.lsp.inlay_hint.enable(true, {0})
+                    print("Inlay Hints Enabled")
+                end
+            end, { desc = "Toggle [I]nlay [H]ints" })
 
 			-- Diagnostic keymaps
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })

@@ -28,12 +28,12 @@ return {
 	keys = {
 		{
 			"<leader>ce",
-			"<cmd>Copilot enable<CR>",
+			"<cmd>Copilot enable<CR><cmd>lua print(\"Copilot Enabled\")<CR>",
 			desc = "[C]opilot [E]nable",
 		},
 		{
 			"<leader>cd",
-			"<cmd>Copilot disable<CR>",
+			"<cmd>Copilot disable<CR><cmd>lua print(\"Copilot Disabled\")<CR>",
 			desc = "[C]opilot [D]isable",
 		},
 		{
