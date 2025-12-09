@@ -58,3 +58,5 @@ typst
 cmake
 callee
 callees
+variadics
+Variadic
