@@ -1,7 +1,7 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	event = "VimEnter",
-	branch = "0.1.x",
+	-- branch = "0.1.x",
 
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -57,8 +57,8 @@ return {
 		vim.keymap.set("n", "<leader>sGc", builtin.git_commits, { desc = "[S]earch Workspace [G]it [C]ommits" })
 		vim.keymap.set("n", "<leader>sGC", builtin.git_bcommits, { desc = "[S]earch Current Buffer [G]it [C]ommits" })
 		vim.keymap.set("n", "<leader>sGb", builtin.git_branches, { desc = "[S]earch [G]it [B]ranches" })
-    vim.keymap.set("n", "<leader>sGs", builtin.git_status, { desc = "[S]earch [G]it [S]tatus" })
-    vim.keymap.set("n", "<leader>sGS", builtin.git_stash, { desc = "[S]earch [G]it [S]tash" })
+        vim.keymap.set("n", "<leader>sGs", builtin.git_status, { desc = "[S]earch [G]it [S]tatus" })
+        vim.keymap.set("n", "<leader>sGS", builtin.git_stash, { desc = "[S]earch [G]it [S]tash" })
 
 		vim.keymap.set("n", "<leader>se", function()
 			builtin.diagnostics({
