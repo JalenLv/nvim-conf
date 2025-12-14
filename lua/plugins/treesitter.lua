@@ -2,7 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	config = function()
-		require("nvim-treesitter.configs").setup({
+		require("nvim-treesitter").setup({
 			-- A list of parser names, or 'all'
 			-- { 'c', 'lua', 'vim', 'vimdoc', 'query' } should always be installed
 			ensure_installed = { "bash", "luadoc", "vimdoc", "markdown", "cpp", "latex" },
