@@ -34,7 +34,7 @@ return {
 		opts = {
 			options = {
 				-- theme = "horizon",
-				theme = "catppuccin",
+				theme = "catppuccin-nvim",
 			},
 		},
 	},
