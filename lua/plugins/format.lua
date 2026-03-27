@@ -43,6 +43,7 @@ return {
 			cmake = { "cmakelang" },
 			-- tex = { "texlab" },
 			typst = { "tinymist" },
+            ocaml = { "ocamlformat" },
 		}
 
 		require("mason-tool-installer").setup({
