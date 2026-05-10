@@ -10,6 +10,8 @@ return {
 			{ "<leader>c_", hidden = true },
 			{ "<leader>d", group = "[D]ebug" },
 			{ "<leader>d_", hidden = true },
+			{ "<leader>g", group = "[G]it" },
+			{ "<leader>g_", hidden = true },
 			{ "<leader>l", group = "[L]atex/[L]uaSnip" },
 			{ "<leader>l_", hidden = true },
 			{ "<leader>m", group = "[M]arkdown" },

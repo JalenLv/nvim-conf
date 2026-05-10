@@ -11,23 +11,68 @@ return {
 			ft({ "cuda" }, ft.get("c"))
 		end,
 	},
-	-- { -- Adds git related signs to the gutter, as well as utilities for managing changes
-	-- 	"lewis6991/gitsigns.nvim",
-	--  event = "BufReadPre",
-	-- 	opts = {
-	-- 		signs = {
-	-- 			add = { text = "+" },
-	-- 			change = { text = "~" },
-	-- 			delete = { text = "_" },
-	-- 			topdelete = { text = "‾" },
-	-- 			changedelete = { text = "~" },
-	-- 			untracked = { text = "┆" },
-	-- 		},
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("gitsigns").setup(opts)
-	-- 	end,
-	-- },
+	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
+		"lewis6991/gitsigns.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("gitsigns").setup({
+				current_line_blame = true,
+				current_line_blame_opts = {
+					delay = 0,
+				},
+
+				on_attach = function(bufnr)
+					local gitsigns = require("gitsigns")
+					local function map(mode, l, r, desc)
+						vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+					end
+
+					-- Navigation
+					map("n", "]h", function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "]h", bang = true })
+						else
+							gitsigns.nav_hunk("next")
+						end
+					end, "Next hunk")
+
+					map("n", "[h", function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "[h", bang = true })
+						else
+							gitsigns.nav_hunk("prev")
+						end
+					end, "Previous hunk")
+
+					-- Stage
+					map("n", "<leader>gs", gitsigns.stage_hunk, "[G]it [S]tage hunk")
+					map("v", "<leader>gs", function()
+						gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					end, "[G]it [S]tage hunk")
+					map("n", "<leader>gS", gitsigns.stage_buffer, "[G]it [S]tage buffer")
+
+					-- Reset
+					map("n", "<leader>gr", gitsigns.reset_hunk, "[G]it [R]eset hunk")
+					map("v", "<leader>gr", function()
+						gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					end, "[G]it [R]eset hunk")
+					map("n", "<leader>gR", gitsigns.reset_buffer, "[G]it [R]eset buffer")
+
+					-- Preview
+					map("n", "<leader>gp", gitsigns.preview_hunk, "[G]it [P]review hunk")
+					map("n", "<leader>gP", gitsigns.preview_hunk_inline, "[G]it [P]review hunk inline")
+
+					-- Diff
+					map("n", "<leader>gd", function()
+						gitsigns.diffthis("~")
+					end, "[G]it [D]iff")
+
+					-- Text objects
+					map({ "o", "x" }, "ih", gitsigns.select_hunk, "Git hunk")
+				end,
+			})
+		end,
+	},
 	{
 		"kevinhwang91/nvim-hlslens",
 		event = "BufReadPre",
