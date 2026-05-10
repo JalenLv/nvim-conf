@@ -29,10 +29,11 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
-	install = {
-		colorscheme = { "catppuccin" },
-	},
+	install = { colorscheme = { "catppuccin" } },
 	checker = {
-		enabled = false,
+		enabled = true,
+		-- check for plugin updates every 1 days
+		frequency = 1440 * 60, -- in seconds
 	},
+	change_detection = { notify = false },
 })
