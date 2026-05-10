@@ -6,7 +6,7 @@ return {
 			require("Comment").setup()
 
 			-- now neovim has built-in commentstring
-      -- but treesitter doesn't have a comentstring for cuda
+			-- but treesitter doesn't have a comentstring for cuda
 			local ft = require("Comment.ft")
 			ft({ "cuda" }, ft.get("c"))
 		end,
@@ -110,23 +110,26 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		event = "BufReadPre",
 		config = function()
-      require("todo-comments").setup()
+			local todo = require("todo-comments")
+			todo.setup()
 
-			vim.keymap.set("n", "]]t", function()
-				require("todo-comments").jump_next({ keywords = { "TODO" } })
-			end, { desc = "Next [T]odo comment" })
+			-- Todo
+			vim.keymap.set("n", "]t", function()
+				todo.jump_next({ keywords = { "TODO" } })
+			end, { desc = "Next TODO" })
 
-			vim.keymap.set("n", "[[t", function()
-				require("todo-comments").jump_prev({ keywords = { "TODO" } })
-			end, { desc = "Previous [T]odo comment" })
+			vim.keymap.set("n", "[t", function()
+				todo.jump_prev({ keywords = { "TODO" } })
+			end, { desc = "Previous TODO" })
 
-			vim.keymap.set("n", "]]f", function()
-				require("todo-comments").jump_next({ keywords = { "FIXME" } })
-			end, { desc = "Next [F]ixme comment" })
+			-- Fixme
+			vim.keymap.set("n", "]f", function()
+				todo.jump_next({ keywords = { "FIXME" } })
+			end, { desc = "Next Fixme" })
 
-			vim.keymap.set("n", "[[f", function()
-				require("todo-comments").jump_prev({ keywords = { "FIXME" } })
-			end, { desc = "Previous [F]ixme comment" })
+			vim.keymap.set("n", "[f", function()
+				todo.jump_prev({ keywords = { "FIXME" } })
+			end, { desc = "Previous Fixme" })
 
 			vim.keymap.set("n", "<leader>st", "<cmd>TodoTelescope<CR>", { desc = "[S]earch [T]odo comments" })
 		end,
@@ -139,24 +142,35 @@ return {
 			-- Extend and create a/i text objects
 			require("mini.ai").setup()
 
-      -- Move any selection in any direction
-      -- Use <M-h/j/k/l> to move selected text/lines
-      require("mini.move").setup()
+			-- Move any selection in any direction
+			-- Use <M-h/j/k/l> to move selected text/lines
+			require("mini.move").setup()
 
-      -- Responsible for gx/gm/gr mappings 
+			-- Responsible for gx/gm/gr mappings
 			require("mini.operators").setup()
 
-      -- Split and join arguments using gS
+			-- Split and join arguments using gS
 			require("mini.splitjoin").setup()
 
-      -- Tabline
+			-- Tabline
 			require("mini.tabline").setup()
 
-      -- Responsible for [ and ] mappings
-			require("mini.bracketed").setup()
+			-- Responsible for [ and ] mappings
+			require("mini.bracketed").setup({
+				file = { suffix = "", options = {} },
+				treesitter = { suffix = "", options = {} },
+			})
 
-      -- Git integration
-      -- require("mini.git").setup()
+			-- Align text using ga
+			require("mini.align").setup({
+				mappings = {
+					start = "",
+					start_with_preview = "ga",
+				},
+			})
+
+			-- Git integration
+			-- require("mini.git").setup()
 		end,
 	},
 	{

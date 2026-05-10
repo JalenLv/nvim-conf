@@ -2,7 +2,9 @@ return {
 	-- Useful plugin to show you pending keybinds.
 	"folke/which-key.nvim",
 	config = function()
-		require("which-key").setup()
+		require("which-key").setup({
+			sort = { "order", "alphanum" },
+		})
 
 		-- Document existing key chains
 		require("which-key").add({
@@ -30,10 +32,6 @@ return {
 			{ "<leader>u_", hidden = true },
 			{ "<leader><leader>", group = "Easymotion" },
 			{ "<leader><leader>_", hidden = true },
-			{ "]]", group = "Next TODO" },
-			{ "]]_", hidden = true },
-			{ "[[", group = "Previous TODO" },
-			{ "[[_", hidden = true },
 		})
 	end,
 }
